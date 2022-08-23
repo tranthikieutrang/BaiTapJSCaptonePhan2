@@ -1,0 +1,27 @@
+//Helper:khai báo hàm biến
+@import "./helper/variables";
+@import "./helper/mixin";
+
+//vendor
+//?import các file scss các file css của thư viện là SASS thì import ở đây
+
+
+//Reset: reset web
+@import"./Base/reset";
+@import"./Base/customize";
+
+// Component:
+@import"./Components/button";
+@import"./Components/table";
+@import"./Components/modal";
+@import"./Components/loading";
+
+//Layout;
+
+@import "./Layouts/header";
+
+ //Pages
+// @import"./Pages/admin/"
+
+//Theme
+@import "./Theme/dark/midautumn"

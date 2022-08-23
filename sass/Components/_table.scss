@@ -1,0 +1,15 @@
+#tbodyProduct {
+  .image-product {
+    text-align: center;
+    max-width: 10rem;
+  }
+
+  .wrap-action {
+    display: flex;
+    gap: 1rem;
+
+    i {
+      cursor: pointer;
+    }
+  }
+}

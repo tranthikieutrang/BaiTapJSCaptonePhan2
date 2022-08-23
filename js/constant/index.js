@@ -1,0 +1,1 @@
+const BaseAPI = 'https://62e77bcf0e5d74566af56fcb.mockapi.io/JSCaption'
