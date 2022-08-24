@@ -1,11 +1,19 @@
-    .nav-item {
-    }
-    .navbar {
-        padding: 1rem 2rem;
-    }
+.nav-item {
+}
+.navbar {
+    padding: 1rem 2rem;
+}
 
-    header {
-        h1 {
-            font-size: 3.5rem;
-        }
+header {
+    h1 {
+        font-size: 3.5rem;
     }
+}
+.invalid input {
+    border-color: red;
+}
+
+.invalid .error-message {
+    color: red;
+    display: block;
+}
