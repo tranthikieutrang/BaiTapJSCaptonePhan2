@@ -25,14 +25,11 @@ $("#myModal").on("hidden.bs.modal", function (e) {
     document.getElementById("frontCamera").value = "";
     document.getElementById("typeModel").value = "";
 
-    document.getElementById("TenSP-err").classList.add('d-none');
-    document.getElementById("GiaSP-err").classList.add('d-none');
-    document.getElementById("HinhSP-err").classList.add('d-none');
-    document.getElementById("HinhSP2-err").classList.add('d-none');
-    document.getElementById("MoTa-err").classList.add('d-none');
-    document.getElementById("backCamera-err").classList.add('d-none');
-    document.getElementById("frontCamera-err").classList.add('d-none');
-    document.getElementById("typeModel-err").classList.add('d-none');
+    let errlist = document.querySelectorAll(".error-message");
+    Array.from(errlist).map((err) => {
+        err.parentElement.classList.remove("invalid");
+        err.innerHTML = "";
+    })
 });
 
 

@@ -40,41 +40,6 @@ const templateProduct = ({
   `;
 };
 
-const toggleErrorMessage = (selector, isShow) => {
-  $(selector).toggleClass("d-none", !!isShow);
-};
-
-const validateForm = () => {
-  const name = document.getElementById("TenSP").value;
-  const price = document.getElementById("GiaSP").value;
-  const img = document.getElementById("HinhSP").value;
-  const imgChangeColor = document.getElementById("HinhSP2").value;
-  const desc = document.getElementById("MoTa").value;
-  const backCamera = document.getElementById("backCamera").value;
-  const frontCamera = document.getElementById("frontCamera").value;
-  const type = document.getElementById("typeModel").value;
-
-  toggleErrorMessage("#TenSP-err", name);
-  toggleErrorMessage("#GiaSP-err", price);
-  toggleErrorMessage("#HinhSP-err", img);
-  toggleErrorMessage("#HinhSP2-err", imgChangeColor);
-  toggleErrorMessage("#MoTa-err", desc);
-  toggleErrorMessage("#backCamera-err", backCamera);
-  toggleErrorMessage("#frontCamera-err", frontCamera);
-  toggleErrorMessage("#typeModel-err", type);
-
-  return [
-    name,
-    price,
-    img,
-    imgChangeColor,
-    desc,
-    backCamera,
-    frontCamera,
-    type,
-  ].every(Boolean);
-};
-
 const getProduct = async () => {
   try {
     toggleLoading(true);
