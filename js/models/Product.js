@@ -88,62 +88,6 @@ const getProduct = async () => {
   }
 };
 
-const addnewProduct = async () => {
-  try {
-    const isValid = validateForm();
-    if (!isValid) return;
-
-    const name = document.getElementById("TenSP").value;
-    const price = document.getElementById("GiaSP").value;
-    const img = document.getElementById("HinhSP").value;
-    const imgChangeColor = document.getElementById("HinhSP2").value;
-    const desc = document.getElementById("MoTa").value;
-    const backCamera = document.getElementById("backCamera").value;
-    const frontCamera = document.getElementById("frontCamera").value;
-    const type = document.getElementById("typeModel").value;
-
-    toggleLoading(true);
-    const { data } = await axios({
-      method: "post",
-      url: BaseAPI,
-      data: {
-        backCamera,
-        frontCamera,
-        desc,
-        iconLogo: "",
-        img,
-        imgChangeColor,
-        name,
-        price,
-        type,
-      },
-    });
-    state.listProduct.push(data);
-    triggerUpdated();
-    $("#myModal").modal("hide");
-    toggleLoading(false);
-
-    new Notify({
-      title: "Success",
-      text: "Add product success",
-      autoclose: true,
-      autotimeout: 2000,
-      status: "success",
-    });
-  } catch (error) {
-    console.log(error);
-    toggleLoading(false);
-
-    new Notify({
-      title: "Failed",
-      text: "Add product failed",
-      autoclose: true,
-      autotimeout: 2000,
-      status: "error",
-    });
-  }
-};
-
 const removeProduct = async (idProduct) => {
   try {
     toggleLoading(true);
@@ -206,61 +150,195 @@ const handleClickEdit = (id) => {
   document.getElementById("typeModel").value = type;
 };
 
-const editProduct = async () => {
-  try {
-    const isValid = validateForm();
-    if (!isValid) return;
 
-    const idProduct = state.idProductEdit;
-    const name = document.getElementById("TenSP").value;
-    const price = document.getElementById("GiaSP").value;
-    const img = document.getElementById("HinhSP").value;
-    const imgChangeColor = document.getElementById("HinhSP2").value;
-    const desc = document.getElementById("MoTa").value;
-    const backCamera = document.getElementById("backCamera").value;
-    const frontCamera = document.getElementById("frontCamera").value;
-    const type = document.getElementById("typeModel").value;
+function Validator(options) {
+  var listRule = {}
+  let btnAdd = document.getElementById("btn-add");
+  //add btn
+  btnAdd.onclick = async function (e) {
+    try {
+      var result = true;
+      options.rules.forEach(function (rule) {
+        var inputElement = document.querySelector(rule.selector);
+        result &= Vadidate(inputElement, rule);
+      }
+      )
+      if (result) {
+        const name = document.getElementById("TenSP").value;
+        const price = document.getElementById("GiaSP").value;
+        const img = document.getElementById("HinhSP").value;
+        const imgChangeColor = document.getElementById("HinhSP2").value;
+        const desc = document.getElementById("MoTa").value;
+        const backCamera = document.getElementById("backCamera").value;
+        const frontCamera = document.getElementById("frontCamera").value;
+        const type = document.getElementById("typeModel").value;
+        toggleLoading(true);
+        const { data } = await axios({
+          method: "post",
+          url: BaseAPI,
+          data: {
+            backCamera,
+            frontCamera,
+            desc,
+            iconLogo: "",
+            img,
+            imgChangeColor,
+            name,
+            price,
+            type,
+          },
+        });
+        state.listProduct.push(data);
+        triggerUpdated();
+        $("#myModal").modal("hide");
+        toggleLoading(false);
 
-    toggleLoading(true);
-    const { data } = await axios({
-      method: "put",
-      url: `${BaseAPI}/${idProduct}`,
-      data: {
-        backCamera,
-        frontCamera,
-        desc,
-        iconLogo: "",
-        img,
-        imgChangeColor,
-        name,
-        price,
-        type,
-      },
-    });
-    state.listProduct = state.listProduct.map((product) =>
-      product.id === data.id ? data : product
-    );
-    triggerUpdated();
-    $("#myModal").modal("hide");
-    toggleLoading(false);
+        new Notify({
+          title: "Success",
+          text: "Add product success",
+          autoclose: true,
+          autotimeout: 2000,
+          status: "success",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toggleLoading(false);
 
-    new Notify({
-      title: "Success",
-      text: "Edit product success",
-      autoclose: true,
-      autotimeout: 2000,
-      status: "success",
-    });
-  } catch (error) {
-    console.log(error);
-    toggleLoading(false);
-
-    new Notify({
-      title: "Failed",
-      text: "Edit product failed",
-      autoclose: true,
-      autotimeout: 2000,
-      status: "error",
-    });
+      new Notify({
+        title: "Failed",
+        text: "Add product failed",
+        autoclose: true,
+        autotimeout: 2000,
+        status: "error",
+      });
+    }
   }
-};
+
+  //Update BTN :
+
+  let btnCapNhat = document.getElementById('btn-edit')
+  btnCapNhat.addEventListener('click', async function (e) {
+    try {
+      var result = true;
+      options.rules.forEach(function (rule) {
+        var inputElement = document.querySelector(rule.selector);
+        result &= Vadidate(inputElement, rule);
+      });
+      if (result) {
+        const idProduct = state.idProductEdit;
+        const name = document.getElementById("TenSP").value;
+        const price = document.getElementById("GiaSP").value;
+        const img = document.getElementById("HinhSP").value;
+        const imgChangeColor = document.getElementById("HinhSP2").value;
+        const desc = document.getElementById("MoTa").value;
+        const backCamera = document.getElementById("backCamera").value;
+        const frontCamera = document.getElementById("frontCamera").value;
+        const type = document.getElementById("typeModel").value;
+        toggleLoading(true);
+        const { data } = await axios({
+          method: "put",
+          url: `${BaseAPI}/${idProduct}`,
+          data: {
+            backCamera,
+            frontCamera,
+            desc,
+            iconLogo: "",
+            img,
+            imgChangeColor,
+            name,
+            price,
+            type,
+          },
+        });
+        state.listProduct = state.listProduct.map((product) =>
+          product.id === data.id ? data : product
+        );
+        triggerUpdated();
+        $("#myModal").modal("hide");
+        toggleLoading(false);
+
+        new Notify({
+          title: "Success",
+          text: "Edit product success",
+          autoclose: true,
+          autotimeout: 2000,
+          status: "success",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toggleLoading(false);
+
+      new Notify({
+        title: "Failed",
+        text: "Edit product failed",
+        autoclose: true,
+        autotimeout: 2000,
+        status: "error",
+      });
+    }
+  })
+
+
+  options.rules.forEach(function (rule) {
+    let inputElement = document.querySelector(rule.selector);
+    //  
+    if (Array.isArray(listRule[rule.selector])) {
+      listRule[rule.selector].push(rule.test)
+    } else {
+
+      listRule[rule.selector] = [rule.test]
+    }
+
+    inputElement.onblur = function () {
+      let results = true;
+      results &= Vadidate(inputElement, rule);
+      console.log(results);
+    };
+
+  })
+
+  function Vadidate(inputElement, rule) {
+    var isValid = true;
+    var errorElement = inputElement.closest('.form-group').querySelector('.error-message');
+    var errorMessage;
+    var rules = listRule[rule.selector];
+    for (var i = 0; i < rules.length; i++) {
+      errorMessage = rules[i](inputElement.value);
+      if (errorMessage) {
+        break;
+      }
+    }
+
+    if (errorMessage) {
+      inputElement.closest('.form-group').classList.add('invalid')
+      errorElement.innerHTML = errorMessage;
+      return isValid = false;
+    } else {
+      inputElement.closest('.form-group').classList.remove('invalid')
+      errorElement.innerHTML = '';
+      return isValid
+    }
+  }
+
+}
+//Kiểm tra trường có nhập chưa
+Validator.isRequired = function (selector, message) {
+  return {
+    selector: selector,
+    test: function (value) {
+      return value.trim() ? undefined : message
+    }
+  }
+}
+//Kiểm tra số
+Validator.isNumber = function (selector, message) {
+  return {
+    selector: selector,
+    test: function (value) {
+      var regex = /^[0-9]+$/;
+      return regex.test(value) ? undefined : message
+    }
+  }
+}
