@@ -297,13 +297,3 @@ Validator.isRequired = function (selector, message) {
     }
   }
 }
-//Kiểm tra số
-Validator.isNumber = function (selector, message) {
-  return {
-    selector: selector,
-    test: function (value) {
-      var regex = /^[0-9]+$/;
-      return regex.test(value) ? undefined : message
-    }
-  }
-}
