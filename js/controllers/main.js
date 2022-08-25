@@ -48,7 +48,6 @@ Validator({
     rules: [
         Validator.isRequired('#TenSP', 'Vui lòng nhập trường này'),
         Validator.isRequired('#GiaSP', 'Vui lòng nhập trường này'),
-        Validator.isNumber('#GiaSP', 'Trường này phải là số'),
         Validator.isRequired('#MoTa', 'Vui lòng nhập trường này'),
         Validator.isRequired('#HinhSP', 'Vui lòng nhập trường này'),
         Validator.isRequired('#HinhSP2', 'Vui lòng nhập trường này'),
