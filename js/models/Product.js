@@ -48,7 +48,6 @@ const getProduct = async () => {
     state.listProduct = res?.data;
     triggerUpdated();
   } catch (error) {
-    console.log(error);
     toggleLoading(false);
   }
 };
@@ -76,7 +75,6 @@ const removeProduct = async (idProduct) => {
       status: "success",
     });
   } catch (error) {
-    console.log(error);
     toggleLoading(false);
 
     new Notify({
@@ -167,7 +165,6 @@ function Validator(options) {
         });
       }
     } catch (error) {
-      console.log(error);
       toggleLoading(false);
 
       new Notify({
@@ -232,7 +229,6 @@ function Validator(options) {
         });
       }
     } catch (error) {
-      console.log(error);
       toggleLoading(false);
 
       new Notify({
@@ -259,7 +255,6 @@ function Validator(options) {
     inputElement.onblur = function () {
       let results = true;
       results &= Vadidate(inputElement, rule);
-      console.log(results);
     };
 
   })
